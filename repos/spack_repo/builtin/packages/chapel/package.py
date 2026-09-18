@@ -63,11 +63,12 @@ class Chapel(AutotoolsPackage, CudaPackage, ROCmPackage):
 
     version("main", branch="main")
 
+    version("2.10.0", sha256="55234b391e32757fbdcf78a4c9517a1f0f8075e4d73a68005fc4ac251ef6b5d4")
     version("2.9.0", sha256="d91ececfc070f0e94c979dd08cdd3f6da84db4ee48fe06f3187ad259ea9553e7")
     version("2.8.0", sha256="80e8c3018e33e49674c7a2542e062547ea41d64d6595edb3b799e90c88f963f8")
-    version("2.7.0", sha256="5e3269babdae334c80fc3f25114698fdfe53e84ea06626af22d2b54eeb75bee6")
 
     with default_args(deprecated=True):
+        version("2.7.0", sha256="5e3269babdae334c80fc3f25114698fdfe53e84ea06626af22d2b54eeb75bee6")
         version("2.6.0", sha256="e469c35be601cf1f59af542ab885e8a14aa2b087b79af0d5372a4421976c74b6")
         version("2.5.0", sha256="020220ca9bf52b9f416e9a029bdc465bb1f635c1e274c6ca3c18d1f83e41fce1")
         version("2.4.0", sha256="a51a472488290df12d1657db2e7118ab519743094f33650f910d92b54c56f315")
@@ -670,7 +671,8 @@ class Chapel(AutotoolsPackage, CudaPackage, ROCmPackage):
         depends_on("llvm@11:20", when="@2.5")
         depends_on("llvm@14:20", when="@2.6:2.7")
         depends_on("llvm@14:21", when="@2.8")
-        depends_on("llvm@14:22", when="@2.9:")
+        depends_on("llvm@14:22", when="@2.9")
+        depends_on("llvm@15:22", when="@2.10:")
 
     # This is because certain systems have binutils installed as a system package
     # but do not include the headers. Spack incorrectly supplies those external
