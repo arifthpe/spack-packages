@@ -672,8 +672,6 @@ class Chapel(AutotoolsPackage, CudaPackage, ROCmPackage):
     # LLVM, and we need to constrain its version the same as we would with
     # llvm=spack.
     depends_on("llvm", when="llvm=spack")
-    # Don't allow using both Spack-installed and bundled LLVM.
-    conflicts("^llvm", when="llvm=bundled")
     with when("^llvm"):
         # TODO: keep up to date with util/chplenv/chpl_llvm.py
         depends_on("llvm@11:17", when="@:2.0.1")
