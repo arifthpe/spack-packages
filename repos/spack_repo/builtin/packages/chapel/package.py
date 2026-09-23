@@ -372,6 +372,7 @@ class Chapel(AutotoolsPackage, CudaPackage, ROCmPackage):
     variant(
         "llvm",
         default="spack",
+        sticky=True,
         description="LLVM backend type. The 'spack' value can use an external "
         "source of LLVM or let spack build a version if no LLVM installs were "
         "previously detected by 'spack external find'",
