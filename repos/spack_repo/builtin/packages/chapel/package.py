@@ -681,9 +681,11 @@ class Chapel(AutotoolsPackage, CudaPackage, ROCmPackage):
     }
     with when("llvm=spack"):
         for chpl_ver_range, llvm_ver_range in chpl_llvm_ver_deps.items():
-            requires(f"llvm@{llvm_ver_range}",
-                     when=f"@{chpl_ver_range}",
-                     msg=f"Chapel {chpl_ver_range} supports LLVM versions {llvm_ver_range}")
+            requires(
+                f"llvm@{llvm_ver_range}",
+                when=f"@{chpl_ver_range}",
+                msg=f"Chapel {chpl_ver_range} supports LLVM versions {llvm_ver_range}",
+            )
 
     # This is because certain systems have binutils installed as a system package
     # but do not include the headers. Spack incorrectly supplies those external
