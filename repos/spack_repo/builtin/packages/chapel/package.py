@@ -671,19 +671,22 @@ class Chapel(AutotoolsPackage, CudaPackage, ROCmPackage):
     # even when llvm=none, which may be provided by a system (Spack-installed)
     # LLVM, and we need to constrain its version the same as we would with
     # llvm=spack.
-    depends_on("llvm", when="llvm=spack")
-    # Don't allow using both Spack-installed and bundled LLVM.
-    conflicts("^llvm", when="llvm=bundled")
-    with when("^llvm"):
-        # TODO: keep up to date with util/chplenv/chpl_llvm.py
-        depends_on("llvm@11:17", when="@:2.0.1")
-        depends_on("llvm@11:18", when="@2.1:2.2")
-        depends_on("llvm@11:19", when="@2.3:2.4")
-        depends_on("llvm@11:20", when="@2.5")
-        depends_on("llvm@14:20", when="@2.6:2.7")
-        depends_on("llvm@14:21", when="@2.8")
-        depends_on("llvm@14:22", when="@2.9")
-        depends_on("llvm@15:22", when="@2.10:")
+    llvm_version_restricted_specs = ["llvm=none ^llvm", "llvm=spack"]
+    # TODO: keep up to date with util/chplenv/chpl_llvm.py
+    llvm_dependency_versions = {
+        "llvm@11:17": "@:2.0.1",
+        "llvm@11:18": "@2.1:2.2",
+        "llvm@11:19": "@2.3:2.4",
+        "llvm@11:20": "@2.5",
+        "llvm@14:20": "@2.6:2.7",
+        "llvm@14:21": "@2.8",
+        "llvm@14:22": "@2.9",
+        "llvm@15:22": "@2.10:",
+    }
+    for spec_ in llvm_version_restricted_specs:
+        with when(spec_):
+            for llvm_versions, chpl_versions in llvm_dependency_versions.items():
+                depends_on(llvm_versions, when=chpl_versions)
 
     # This is because certain systems have binutils installed as a system package
     # but do not include the headers. Spack incorrectly supplies those external
