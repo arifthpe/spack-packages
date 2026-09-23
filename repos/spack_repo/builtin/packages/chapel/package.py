@@ -669,15 +669,21 @@ class Chapel(AutotoolsPackage, CudaPackage, ROCmPackage):
     requires("re2=bundled", when="+mason", msg="Mason requires re2=bundled")
 
     # TODO: keep up to date with util/chplenv/chpl_llvm.py
+    chpl_llvm_ver_deps = {
+        ":2.0.1": "11:17",
+        "2.1:2.2": "11:18",
+        "2.3:2.4": "11:19",
+        "2.5": "11:20",
+        "2.6:2.7": "14:20",
+        "2.8": "14:21",
+        "2.9": "14:22",
+        "2.10:": "15:22",
+    }
     with when("llvm=spack"):
-        depends_on("llvm@11:17", when="@:2.0.1")
-        depends_on("llvm@11:18", when="@2.1:2.2")
-        depends_on("llvm@11:19", when="@2.3:2.4")
-        depends_on("llvm@11:20", when="@2.5")
-        depends_on("llvm@14:20", when="@2.6:2.7")
-        depends_on("llvm@14:21", when="@2.8")
-        depends_on("llvm@14:22", when="@2.9")
-        depends_on("llvm@15:22", when="@2.10:")
+        for chpl_ver_range, llvm_ver_range in chpl_llvm_ver_deps.items():
+            requires(f"llvm@{llvm_ver_range}",
+                     when=f"@{chpl_ver_range}",
+                     msg=f"Chapel {chpl_ver_range} supports LLVM versions {llvm_ver_range}")
 
     # This is because certain systems have binutils installed as a system package
     # but do not include the headers. Spack incorrectly supplies those external
