@@ -667,13 +667,8 @@ class Chapel(AutotoolsPackage, CudaPackage, ROCmPackage):
     requires("comm=none", when="+mason", msg="Mason requires comm=none")
     requires("re2=bundled", when="+mason", msg="Mason requires re2=bundled")
 
-    # This phrasing is because we actually still need LLVM (support library)
-    # even when llvm=none, which may be provided by a system (Spack-installed)
-    # LLVM, and we need to constrain its version the same as we would with
-    # llvm=spack.
-    depends_on("llvm", when="llvm=spack")
-    with when("^llvm"):
-        # TODO: keep up to date with util/chplenv/chpl_llvm.py
+    # TODO: keep up to date with util/chplenv/chpl_llvm.py
+    with when("llvm=spack"):
         depends_on("llvm@11:17", when="@:2.0.1")
         depends_on("llvm@11:18", when="@2.1:2.2")
         depends_on("llvm@11:19", when="@2.3:2.4")
