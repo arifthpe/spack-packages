@@ -63,11 +63,7 @@ class Chapel(AutotoolsPackage, CudaPackage, ROCmPackage):
 
     version("main", branch="main")
 
-    version(
-        "2.10.0",
-        sha256="55234b391e32757fbdcf78a4c9517a1f0f8075e4d73a68005fc4ac251ef6b5d4",
-        url="https://chapel-lang.org/tmp/chapel-2.10.0.tar.gz",
-    )
+    version("2.10.0", sha256="55234b391e32757fbdcf78a4c9517a1f0f8075e4d73a68005fc4ac251ef6b5d4")
     version("2.9.0", sha256="d91ececfc070f0e94c979dd08cdd3f6da84db4ee48fe06f3187ad259ea9553e7")
     version("2.8.0", sha256="80e8c3018e33e49674c7a2542e062547ea41d64d6595edb3b799e90c88f963f8")
 
