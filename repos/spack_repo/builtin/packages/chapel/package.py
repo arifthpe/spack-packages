@@ -676,6 +676,7 @@ class Chapel(AutotoolsPackage, CudaPackage, ROCmPackage):
         "2.10:": "15:22",
     }
     with when("llvm=spack"):
+        depends_on("llvm")
         for chpl_ver_range, llvm_ver_range in chpl_llvm_ver_deps.items():
             requires(
                 f"^llvm@{llvm_ver_range}",
