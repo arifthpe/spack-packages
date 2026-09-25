@@ -28,6 +28,9 @@ class Arkouda(MakefilePackage):
     version("main", branch="main")
 
     version(
+        "2026.07.15", sha256="483574978fd3a91c5532076cce4698170726f6717c8896f230024fd7722fc6f9"
+    )
+    version(
         "2026.02.27", sha256="10ac344937ba7c8bfa4c3a23a2fadc4d0c3a3e2051acd0c2c3db7a6d453a660b"
     )
     version(
@@ -83,7 +86,10 @@ class Arkouda(MakefilePackage):
         "chapel@2.4:2.6 +hdf5 +zmq", when="@2025.12.16", type=("build", "link", "run", "test")
     )
     depends_on(
-        "chapel@2.4:2.7 +hdf5 +zmq", when="@2026.02.02:", type=("build", "link", "run", "test")
+        "chapel@2.4:2.7 +hdf5 +zmq", when="@2026.02.02", type=("build", "link", "run", "test")
+    )
+    depends_on(
+        "chapel@2.5:2.9 +hdf5 +zmq", when="@2026.07.15:", type=("build", "link", "run", "test")
     )
 
     depends_on("cmake@3.13.4:", type="build")
