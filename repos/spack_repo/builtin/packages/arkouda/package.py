@@ -86,7 +86,7 @@ class Arkouda(MakefilePackage):
         "chapel@2.4:2.6 +hdf5 +zmq", when="@2025.12.16", type=("build", "link", "run", "test")
     )
     depends_on(
-        "chapel@2.4:2.7 +hdf5 +zmq", when="@2026.02.02", type=("build", "link", "run", "test")
+        "chapel@2.4:2.7 +hdf5 +zmq", when="@2026.02.02:2026.02.27", type=("build", "link", "run", "test")
     )
     depends_on(
         "chapel@2.5:2.9 +hdf5 +zmq", when="@2026.07.15:", type=("build", "link", "run", "test")
